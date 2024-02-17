@@ -9,5 +9,8 @@ export default {
     },
   },
   // eslint-disable-next-line no-undef
-  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
+  plugins: [
+    // ...
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
 };
