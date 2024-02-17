@@ -104,7 +104,7 @@ const Table = () => {
   ];
 
   return (
-    <div className="p-5 overflow-y-scroll h-[85vh] flex flex-col gap-4    scrollbar-thin scrollbar-thumb-[#424242]  ">
+    <div className="p-5 overflow-y-scroll h-[85vh] flex flex-col gap-4    scrollbar-thin    ">
       {AccordionData.map((item, index) => (
         <Accordion
           title={item.title}

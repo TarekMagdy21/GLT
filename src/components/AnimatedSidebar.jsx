@@ -5,34 +5,27 @@ import logo from "../assets/sidebar/logo.svg";
 import avatar from "../assets/sidebar/avatar.svg";
 const AnimatedSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log("Manga", isOpen);
-  const navAnimation = {
-    hidden: {
-      width: 0,
-      padding: 0,
-    },
-    show: {
-      width: "200px",
-      padding: "5px 15px",
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
+
   return (
     <div
-      className="main-container"
+      className=""
       onMouseEnter={() => {
-        console.log("Manga");
         setIsOpen(true);
       }}
       onMouseLeave={() => {
-        console.log("Manga2");
         setIsOpen(false);
       }}
     >
       <motion.div
-        animate={{ width: isOpen ? "240px" : "100px" }}
+        animate={{
+          width: isOpen ? "240px" : "80px",
+
+          transition: {
+            duration: 0.5,
+            type: "spring",
+            damping: 12,
+          },
+        }}
         className="bg-[#181818] h-screen   pt-6 px-1"
         transition={{ duration: 0.2 }} // Add this line
       >
@@ -44,29 +37,33 @@ const AnimatedSidebar = () => {
                 key={i.src}
                 className="group p-1 rounded-lg ps-5 relative mb-3 pr-10 cursor-pointer"
               >
-                <div className={`flex items-center gap-4`}>
+                <div className={`flex items-center gap-4 overflow-hidden `}>
                   <motion.img
-                    animate={{ width: isOpen ? "30px" : "50px" }}
+                    animate={{
+                      width: isOpen ? "30px" : "50px",
+                      transition: {
+                        duration: 0.3,
+                      },
+                    }}
                     src={i.src}
                     alt={i.src}
-                    className={`w-6  justify-self-center ${
+                    className={`w-6 overflow-hidden  justify-self-center ${
                       index < 2 && "imageColor"
                     }     `}
                   />
 
                   <motion.p
-                    initial={false}
-                    animate={{
-                      width: isOpen ? "240px" : "100px",
-                      opacity: isOpen ? "100" : "0",
-                      transition: {
-                        duration: 0.3,
-                      },
+                    variants={{
+                      hidden: { opacity: 0},
+                      visible: { opacity: 1 },
                     }}
-                    className={`
-            ${index === 0 ? "font-semibold" : "font-normal"} text-xl  
-            ${index < 2 && "group-hover:text-[#53acff]"}
-          `}
+                    initial="hidden"
+                    animate={isOpen ? "visible" : "hidden"}
+                    transition={{ delay:0.2,duration:0.5  }}
+                    className={`  
+        ${index === 0 ? "font-semibold" : "font-normal"} text-lg  
+        ${index < 2 && "group-hover:text-[#53acff]"}
+      `}
                   >
                     {i.title}
                   </motion.p>
@@ -89,15 +86,44 @@ const AnimatedSidebar = () => {
           <div className="flex flex-col items-center justify-center gap-10">
             {sidebarData.map((i) => (
               <motion.img
-                animate={{ width: !isOpen && "35px" }}
+                animate={{ width: !isOpen && "25px" }}
                 key={i.src}
                 src={i.src}
                 alt={i.src}
-                className={` w-7`}
               />
             ))}
           </div>
         )}
+        <div className="flex flex-col items-center gap-5  mx-auto">
+          <div className="flex items-center gap-4 h-[50vh]">
+            <img src={avatar} alt="" className="mt-auto" />
+            {isOpen && (
+              <div className="mt-auto">
+                <motion.p className="font-semibold"  variants={{
+                      hidden: { opacity: 0},
+                      visible: { opacity: 1 },
+                    }}
+                    initial="hidden"
+                    animate={isOpen ? "visible" : "hidden"}
+                    transition={{ delay:0.2,duration:0.5  }}>Moni Roy</motion.p>
+                <motion.p className="text-[#979797]"  variants={{
+                      hidden: { opacity: 0},
+                      visible: { opacity: 1 },
+                    }}
+                    initial="hidden"
+                    animate={isOpen ? "visible" : "hidden"}
+                    transition={{ delay:0.2,duration:0.5  }}>Beginner</motion.p>
+              </div>
+            )}
+          </div>
+          {isOpen && <motion.p  variants={{
+                      hidden: { opacity: 0},
+                      visible: { opacity: 1 },
+                    }}
+                    initial="hidden"
+                    animate={isOpen ? "visible" : "hidden"}
+                    transition={{ delay:0.2,duration:0.5  }} className="text-[#424242]">Street Suite 2.0</motion.p>}
+        </div>
       </motion.div>
     </div>
   );
