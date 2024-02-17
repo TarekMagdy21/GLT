@@ -1,0 +1,12 @@
+.transition-open {
+  transition-property: opacity, transform;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.transition-open.show {
+  opacity: 1;
+  transform: translateY(0);
+}
